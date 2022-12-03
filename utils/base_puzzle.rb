@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'input_reader'
+require 'debug'
 
 class BasePuzzle
   attr_reader :data
