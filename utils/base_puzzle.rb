@@ -6,8 +6,8 @@ require 'debug'
 class BasePuzzle
   attr_reader :data
 
-  def initialize(file:)
-    input_reader = InputReader.new(file: file).read
+  def initialize(file:, strip: true)
+    input_reader = InputReader.new(file: file, strip: strip).read
     @data = input_reader.parsed_content
   end
 
