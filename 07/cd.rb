@@ -3,11 +3,14 @@
 require_relative 'command'
 
 class Cd < Command
-  def perform
-    [:move, @argument]
+  def perform(file_system)
+    file_system.cursor = build_cursor(file_system.cursor)
+    file_system.create_directory!
   end
 
-  def build_cursor(current_cursor, _dir_tree)
+  private
+
+  def build_cursor(current_cursor)
     return '/' if @argument == '/'
 
     current_cursor = '' if current_cursor == '/'

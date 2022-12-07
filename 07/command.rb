@@ -10,9 +10,10 @@ class Command
   end
 
   def self.parse(command, *output)
-    pcommand, pargument = command.gsub('$ ', '').split
+    parsed_command, parsed_argument = command.gsub('$ ', '').split
 
-    Object.const_get(_command.capitalize).new(pcommand, pargument, output)
+    Object.const_get(parsed_command.capitalize)
+          .new(parsed_command, parsed_argument, output)
   end
 end
 

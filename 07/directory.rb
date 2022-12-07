@@ -7,6 +7,10 @@ class Directory
     @files = []
   end
 
+  def add_file!(file)
+    @files << file
+  end
+
   def size
     @files.sum(&:size)
   end

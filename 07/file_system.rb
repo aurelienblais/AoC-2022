@@ -5,7 +5,8 @@ require_relative 'directory'
 require_relative 'file'
 
 class FileSystem
-  attr_reader :directories, :inputs, :parsed_inputs, :cursor
+  attr_reader :directories, :inputs, :parsed_inputs
+  attr_accessor :cursor
 
   def initialize(inputs:)
     @inputs = inputs
@@ -37,6 +38,14 @@ class FileSystem
     @directories_size
   end
 
+  def create_directory!
+    @directories[@cursor] ||= Directory.new
+  end
+
+  def add_file!(file)
+    @directories[@cursor].add_file!(file)
+  end
+
   private
 
   def parse_inputs
@@ -48,14 +57,7 @@ class FileSystem
   def process
     @parsed_inputs.each do |args|
       command = Command.parse(*args)
-      command_output = command.perform
-      case command_output[0]
-      when :move
-        @cursor = command.build_cursor(@cursor, @directories.keys)
-        @directories[@cursor] ||= Directory.new
-      when :list_files
-        command.add_files(@directories[@cursor])
-      end
+      command.perform(self)
     end
   end
 end
