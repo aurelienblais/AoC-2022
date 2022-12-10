@@ -10,14 +10,10 @@ class Puzzle < BasePuzzle
     cpu.process
 
     # -- Part One
-    p((20..cpu.x_history.length).step(40).sum do |idx|
-      cpu.x_history[idx - 1] * idx
-    end)
+    p cpu.signal_strength
 
     # -- Part Two
-    pp(cpu.x_history.map.with_index do |elem, idx|
-      (elem - 1..elem + 1).include?(idx % 40) ? '#' : '.'
-    end.each_slice(40).to_a.map(&:join))
+    cpu.display_crt_output
   end
 end
 
