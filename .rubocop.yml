@@ -3,3 +3,9 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+Style/EvalWithLocation:
+  Enabled: false
+
+Security/Eval:
+  Enabled: false
